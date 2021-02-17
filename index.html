@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" />
+    <meta name="keywords" content="iOS证书在线检测,ipa证书检测,p12证书在线检测,描述文件在线检测" />
+    <meta name="description" content="iOS证书在线检测,ipa证书检测,p12证书在线检测,描述文件在线检测" />
+    <title>iOS证书在线检测</title>
+    <link rel="stylesheet" href="static/cloud/static/css/font.css" />
+    <link rel="stylesheet" type="text/css" href="static/cloud/static/css/spectrum.css" />
+    <link rel="stylesheet" type="text/css" href="static/cloud/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="static/cloud/static/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="static/cloud/static/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="static/cloud/static/css/h5.css" />
+    <script type="text/javascript" src="static/cloud/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="static/cloud/static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="static/cloud/static/js/vue.js"></script>
+    <script type="text/javascript" src="static/cloud/static/js/js.js"></script>
+    <script type="text/javascript" src="static/cloud/static/js/spectrum.js"></script>
+    <script type="text/javascript" src="static/cloud/static/js/jquery.lazyload.js"></script>
+    <script>
+        isHideFooter = false;
+    </script>
+</head>
+<body>
+<header>
+    <style>
+        #overlay {
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            z-index:auto;
+            display : fixed;
+        }
+
+        .shadow{
+            width:100%;
+            height:100%;
+            position:absolute;
+            left:0;
+            top:0;
+            z-index:998;
+            background-color:#000;
+            opacity:0.6;
+            display:none;
+        }
+        .addBox{
+        //其他属性
+        z-index:999;
+        }
+    </style>
+</header>
+<span class="icon-menu iconfont phone-menu visible-xs"></span>
+<div class="phone-shadow"></div>
+<script src="static/cloud/static/js/html2canvas.js"></script>
+<script src="static/cloud/static/js/canvas2image.js"></script>
+<div class="toolkit-common-wrap">
+    <input id="toggleResStatus" type="hidden" value="">
+    <div class="container">
+        <div class="shadow">
+            <div style="text-align: center; width: 100%; height: 100%;">
+                <img src="static/pack/checkcert/images/loading.gif" style="width: 60px; height: 60px;position: absolute; left:50%; top: 50%; margin-left: -30px;margin-top: -30px;">
+            </div>
+        </div>
+        <div class="crumbs">
+            <link rel="stylesheet" href="static/pack/checkcert/libs/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+            <link rel="stylesheet" href="static/pack/checkcert/libs/animate.css" />
+            <link rel="stylesheet" href="static/pack/checkcert/styles/index.css" />
+
+            <input type="file" name="uploadfile" class="hide" onchange="handleFileUpload(this.files, $(this))" data-target="" id="uploadfile" />
+            <div class="content container mt-80 inner-content">
+                <h3 class="text-center font-36 font-cert-check-title">iOS 证书在线检测</h3>
+                <h3 class="text-center font-16 mt-20 color-8c9497">想检查证书到期时间？用户反馈无法下载安装？为您在线检测 iOS 证书是否正常</h3>
+                <div class="text-center cert mt-30 col-md-8 col-md-offset-2">
+                    <div class="form-horizontal text-center" id="checkStatus">
+                        <ul id="certCheckTab" class="nav nav-tabs">
+                            <li class="active"><a href="#certFile" data-id="file" data-toggle="tab" onclick="toggleShowRes()">p12 文件检测</a></li>
+                            <li> <a href="#shortUrl" data-id="url" data-toggle="tab" onclick="toggleHideRes()">  安装包检测</a> </li>
+                        </ul>
+                        <div id="certCheckTabContent" class="tab-content" style="">
+                            <div class="tab-pane fade" id="shortUrl">
+                                <link href="static/pack/checkcert/ipa/2.2b9e45b9.chunk.css" rel="stylesheet">
+                                <link href="static/pack/checkcert/ipa/main.52645ede.chunk.css" rel="stylesheet">
+                                <div id="root">
+                                    <div class="App">
+                                        <div class="ant-divider ant-divider-horizontal ant-divider-with-text-center" role="separator">
+                                        </div>
+                                        <div class="ant-spin-nested-loading">
+                                            <div class="ant-spin-container">
+      <span>
+       <div class="ant-upload ant-upload-drag" id="target_box">
+        <span tabindex="0" class="ant-upload ant-upload-btn" role="button" onclick="document.querySelector('#ipaFile').click()")>
+            <input type="file" name="ipaFile" class="hide" accept=".mobileprovision,.p12,.ipa" data-target="" id="ipaFile" onchange="ipaUpload(this.files, $(this))"/>
+         <div class="ant-upload-drag-container">
+          <p class="ant-upload-drag-icon"><i aria-label="icon: inbox" class="anticon anticon-inbox">
+            <svg viewbox="0 0 1024 1024" focusable="false" class="" data-icon="inbox" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+             <path d="M885.2 446.3l-.2-.8-112.2-285.1c-5-16.1-19.9-27.2-36.8-27.2H281.2c-17 0-32.1 11.3-36.9 27.6L139.4 443l-.3.7-.2.8c-1.3 4.9-1.7 9.9-1 14.8-.1 1.6-.2 3.2-.2 4.8V830a60.9 60.9 0 0 0 60.8 60.8h627.2c33.5 0 60.8-27.3 60.9-60.8V464.1c0-1.3 0-2.6-.1-3.7.4-4.9 0-9.6-1.3-14.1zm-295.8-43l-.3 15.7c-.8 44.9-31.8 75.1-77.1 75.1-22.1 0-41.1-7.1-54.8-20.6S436 441.2 435.6 419l-.3-15.7H229.5L309 210h399.2l81.7 193.3H589.4zm-375 76.8h157.3c24.3 57.1 76 90.8 140.4 90.8 33.7 0 65-9.4 90.3-27.2 22.2-15.6 39.5-37.4 50.7-63.6h156.5V814H214.4V480.1z"></path>
+            </svg></i></p>
+          <p class="ant-upload-text">点击选择文件或拖拽文件至此区域</p>
+          <p class="ant-upload-hint">（支持 ipa 格式文件）</p>
+         </div>
+        </span>
+       </div>
+      </span>
+                                            </div>
+                                        </div>
+                                        <div id="Name"></div>
+                                        <div id="Status"></div>
+                                        <div id="ExpireTime"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade active in " id="certFile">
+                                <h5 class="url-title mb-30">请上传 iOS p12 证书及 mobilprovision 文件</h5>
+                                <div class="container-fluid file-upload-container">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="upload-img-init " id="uploadCert">
+                                                <img id="" src="static/pack/checkcert/images/p12_file_2x.png" class="img-responsive center-block file-icon" />
+                                                <div class="text-center upload-tips">
+                                                    <p>点击选择文件或拖拽文件至此区域</p>
+                                                    <p>（支持 p12 格式证书）</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="upload-img-init " id="uploadProvision">
+                                                <img id="" src="static/pack/checkcert/images/optional_icon_2x.png" class="img-responsive center-block file-icon optional-icon" />
+                                                <img id="" src="static/pack/checkcert/images/mp_icon_2x.png" class="img-responsive center-block file-icon" />
+                                                <div class="text-center upload-tips">
+                                                    <p>点击选择文件或拖拽文件至此区域</p>
+                                                    <p>（支持 mobileprovision 格式文件）</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 col-md-offset-2">
+                                            <div class="form-group">
+                                                <span for="name" class="font-16">p12 证书密码：</span>
+                                                <input name="password" type="password" id="password" class="form-control" placeholder="如密码为空可不填" />
+                                            </div>
+                                            <button class="btn-u h-30 mt-30 btn-check" id="submitButton"><span class="font-13">立即检测</span></button>
+                                        </div>
+
+                                    </div>
+                                    <hr class="mt-15 mb-20" />
+                                </div>
+                            </div>
+                            <div class="hide text-center" id="certResult">
+                                <h5 class="url-title mb-30">检测结果</h5>
+                                <p class="hide" id="errorMsg">
+                                    <span style="color: #FD5A5A; font-size: 18px;"></span>
+                                    <a
+                                            href="javascript:void(0);"
+                                            class="popovers hide"
+                                            data-html="true"
+                                            data-container="body"
+                                            data-toggle="popover"
+                                            data-trigger="hover"
+                                            data-placement="bottom"
+                                            data-content=""
+                                            data-original-title=""
+                                            title=""
+                                    ><i class="fa fa-question-circle" style="font-size:14px;color:#29bb9c;"></i>
+                                    </a>
+                                </p>
+                                <div class="row text-center" id="certDetail">
+                                    <div id="fileCertResult">
+                                        <div class="cert-result mb-40">
+                                            <div class="cert-icon" style="">
+                                                <img id="certFlag" src="static/pack/checkcert/images/cert_icon_2x.png" class="img-responsive pull-right" />
+                                            </div>
+                                            <div class="text-left" style="">
+                                                <p class="check-item">
+                                                    <span class="">证书状态</span>
+                                                </p>
+                                                <p class="" style="margin-bottom:0">
+                        <span class="font-18" style="font-weight:600">
+                          <span class="certStatusSpan" id="certStatus"></span>
+                          <a
+                                  href="javascript:void(0);"
+                                  id="certStatusExplain"
+                                  class="popovers certStatusExplain"
+                                  data-html="true"
+                                  data-container="body"
+                                  data-toggle="popover"
+                                  data-trigger="hover"
+                                  data-placement="bottom"
+                                  data-content=""
+                                  data-original-title=""
+                                  title=""
+                          ><i class="fa fa-question-circle" style="font-size:14px;color:#29bb9c;"></i
+                          ></a>
+                        </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" style="">
+                                            <p class="check-item" style="">
+                                                <span class="text-right item-title" style="margin-right: 0px;">证书名称：</span>
+                                                <span class="text-left item-result certNameSpan" id="certName"></span>
+                                            </p>
+
+                                            <p class="check-item">
+                                                <span class="text-right item-title" style="margin-right: 0px;">过期时间：</span>
+                                                <span class="text-left item-result certExpireDateSpan" id="certExpireDate"></span>
+                                            </p>
+
+                                            <p class="check-item revocationTime hide">
+                                                <span class="text-right item-title" style="margin-right: 0px;">掉签时间：</span>
+                                                <span class="text-left item-result" id="revocationTime"></span>
+                                            </p>
+
+                                            <div class="provision-detail hide">
+                                                <p class="check-item">
+                                                    <span class="text-right item-title" style="margin-right: 0px;">mobileprovision 状态：</span>
+                                                    <span class="text-left item-result" id="provisionStatus"></span>
+                                                </p>
+                                                <p class="check-item">
+                                                    <span class="text-right item-title" style="margin-right: 0px;">mobileprovision 过期时间：</span>
+                                                    <span class="text-left item-result" id="provisionExpireDate"></span>
+                                                </p>
+                                                <p class="check-item provisionSignType hide">
+                                                    <span class="text-right item-title" style="margin-right: 0px;">打包方式：</span>
+                                                    <span class="text-left item-result" id="provisionSignType"></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="urlCertResult">
+                                        <div class="col-md-12" style="">
+                                            <p class="check-item">
+                                                <span class="text-right item-title">证书状态：</span>
+                                                <span class="font-18 text-left item-result" style="font-weight:500">
+                        <span class="certStatusSpan" id="certStatus"></span>
+                        <a
+                                href="javascript:void(0);"
+                                id="certStatusExplain"
+                                class="popovers certStatusExplain"
+                                data-html="true"
+                                data-container="body"
+                                data-toggle="popover"
+                                data-trigger="hover"
+                                data-placement="bottom"
+                                data-content=""
+                                data-original-title=""
+                                title=""
+                        ><i class="fa fa-question-circle" style="font-size:14px;color:#29bb9c;"></i
+                        ></a>
+                      </span>
+                                            </p>
+
+                                            <p class="check-item" style="">
+                                                <span class="text-right item-title" style="margin-right: 0px;">证书名称：</span>
+                                                <span style="" class="text-left item-result certNameSpan" id="certName"></span>
+                                            </p>
+
+                                            <p class="check-item">
+                                                <span class="text-right item-title" style="margin-right: 0px;">过期时间：</span>
+                                                <span class="text-left item-result certExpireDateSpan" id="certExpireDate"></span>
+                                            </p>
+
+                                            <p class="check-item appName hide">
+                                                <span class="text-right item-title" style="margin-right: 0px;">应用名称：</span>
+                                                <span class="text-left item-result appName hide" id="appName"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center row hide" id="search">
+                                <img src="static/pack/checkcert/images/search.gif" class="img-responsive center-block" />
+                                <p class="">检测中...</p>
+                            </div>
+                        </div>
+                        <div class="row mb-30">
+                            <a style="display: inline-block; padding: 6px 13px;" class="btn-u h-30 mt-30 btn-check hide" id="recheckBtn" onclick="toggleRes()"> <span class="font-13">继续检测其他证书</span></a>
+                        </div>
+                        <div class="alert alert-warning alert-dismissablewarning mb-0 mt-50 text-left" id="fileCheckAlert" style="border-radius:0;border:none;color:#555; margin-bottom: 0px;">
+                            <i class="fa fa-exclamation-circle"></i><span class="ml-5" style="margin-left:5px;">您提交的证书文件和密码，将仅用于本次证书有效性检测，我们不会进行存储。</span> <br />
+                            <i class="fa fa-exclamation-circle"></i
+                            ><span class="ml-5" style="margin-left:5px;">证书检测结果精准性100%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="static/pack/checkcert/libs/jquery.min.js"></script>
+            <script src="static/pack/checkcert/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+            <script src="static/pack/checkcert/js/index.js"></script>
+        </div>
+    </div>
+    <div id="view"></div>
+    <script>!function(c){function e(e){for(var r,t,n=e[0],o=e[1],u=e[2],i=0,l=[];i<n.length;i++)t=n[i],Object.prototype.hasOwnProperty.call(a,t)&&a[t]&&l.push(a[t][0]),a[t]=0;for(r in o)Object.prototype.hasOwnProperty.call(o,r)&&(c[r]=o[r]);for(s&&s(e);l.length;)l.shift()();return p.push.apply(p,u||[]),f()}function f(){for(var e,r=0;r<p.length;r++){for(var t=p[r],n=!0,o=1;o<t.length;o++){var u=t[o];0!==a[u]&&(n=!1)}n&&(p.splice(r--,1),e=i(i.s=t[0]))}return e}var t={},a={1:0},p=[];function i(e){if(t[e])return t[e].exports;var r=t[e]={i:e,l:!1,exports:{}};return c[e].call(r.exports,r,r.exports,i),r.l=!0,r.exports}i.m=c,i.c=t,i.d=function(e,r,t){i.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:t})},i.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},i.t=function(r,e){if(1&e&&(r=i(r)),8&e)return r;if(4&e&&"object"==typeof r&&r&&r.__esModule)return r;var t=Object.create(null);if(i.r(t),Object.defineProperty(t,"default",{enumerable:!0,value:r}),2&e&&"string"!=typeof r)for(var n in r)i.d(t,n,function(e){return r[e]}.bind(null,n));return t},i.n=function(e){var r=e&&e.__esModule?function(){return e.default}:function(){return e};return i.d(r,"a",r),r},i.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},i.p="/";var r=this["webpackJsonpios-check"]=this["webpackJsonpios-check"]||[],n=r.push.bind(r);r.push=e,r=r.slice();for(var o=0;o<r.length;o++)e(r[o]);var s=n;f()}([])</script>
+    <script src="static/pack/checkcert/ipa/index.js"/>
+    <script src="static/default/js/clipboard.js"></script>
+    <script>
+        if (!isHideFooter) {
+            $('.right-float-window').show();
+        }
+
+        $(function () {
+            $("body").on('click', '.fail-pay', function () {
+                $(".pay-money a:last").removeClass("disabled");
+                $(".pay-money a:last").addClass("toPay");
+            });
+            $("body").on('click', '.complete-pay', function () {
+                $(".toPay").removeClass('disabled');
+                order_sn = $('#myModalPay').find('input[name="order_sn"]').val();
+                if (!order_sn) {
+                    $('#myModalPay').modal('hide');
+                    return;
+                }
+
+                $.post('/index.php/check-pay', {order_sn: order_sn}, function (result) {
+                    if (result.code != 200) {
+                        $('#myModalPay').modal('hide');
+                    } else {
+                        if (result.data.service_type == 1 || result.data.service_type == 2) {
+                            window.location.href = '/index.php/publish';
+                        } else if (result.data.service_type == 3) {
+                            window.location.href = '/index.php/publish_sign?id=' + result.data.appid;
+                        }
+                    }
+                })
+
+            });
+
+            var windowWidth = $(window).width();
+            $("body").on('click', '.chatQQ', function () {
+                console.info(windowWidth);
+                if (windowWidth <= 750) {
+                    /*1234567对应的就是需要聊天的客服*/
+                    window.open("mqqwpa://im/chat?chat_type=wpa&uin=联系代理&version=1&src_type=web&web_src=oicqzone.com");
+                } else {
+                    window.open("http://wpa.qq.com/msgrd?v=3&uin=联系代理&site=qq&menu=yes");
+                }
+            });
+            var source_login = 0;
+            if (windowWidth <= 750 && source_login) {
+                Modal.templateModal({
+                    imgName: "modal-bg-3.jpg",
+                    title1: '提示',
+                    title2: '',
+                    p: '建议您：<br>尽快<span class="color-danger">电脑</span>登录超级签网站，即可享受<br><span class="iconfont icon-xingxing" style="color: #fec323; font-size: 12px; margin-right: 5px;"></span>免费试用应用分发APP<br><span class="iconfont icon-xingxing" style="color: #fec323; font-size: 12px; margin-right: 5px;"></span>每天免费赠送<span class="color-danger">10</span>次分发下载次数',
+                    align: 'left', // 居左 left, 居中 center, 居右 right
+                    btnText: '知道了',
+                    btnClass: "modal-btn2"
+                });
+            }
+        });
+
+        function alert(msg, callback, cancelCallback, align, successBtn, cancelBtn) {
+            if (!align) align = 'center';
+            if (!successBtn) successBtn = '确定';
+            Modal.generalModal({
+                backdrop: true, // 点击阴影是否关闭弹窗， // true 开启； false 关闭
+                iconClass: "",  // success: icon-modal-success1,  error: icon-modal-error2
+                title: '',  // 弹窗标题
+                p: msg, // 弹窗内容
+                align: align, // 弹窗内容排列顺序 left center right
+                cancelBtnText: cancelBtn,    // 取消按钮文字
+                successBtnText: successBtn,  // 确定按钮文字
+                successBtnModal: true, // 点击确定按钮是否关闭弹窗 true 关闭 false 不关闭
+                cancelBtnModal: true, // 点击取消按钮是否关闭弹窗 true 关闭 false 不关闭
+                successCallback: callback,
+                cancelCallback: cancelCallback
+            });
+        }
+    </script></body>
+</html>
+
+
+
+
+
