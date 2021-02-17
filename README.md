@@ -33,3 +33,8 @@ root 这里填写网站源码根路径。
 
 访问链接：  
 http://www.example.com;  
+
+## 三、效果展示：  
+https://github.com/Forever18/p12certcheck/blob/main/static/pack/checkcert/images/ipa.png
+https://github.com/Forever18/p12certcheck/blob/main/static/pack/checkcert/images/p12.png
+
