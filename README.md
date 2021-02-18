@@ -1,4 +1,6 @@
 # iOS证书检测介绍
+此款源码能够帮助用户快速检测并且了解到，其使用的IOS证书是否正常工作，以及证书状态是否由开发人员撤消或者是被苹果公司封停等原因。方便用户快速定位证书状态情况，并给出相应过期时间或撤消时间信息。  
+
 
 ##  一、功能如下：  
 1.支持在线ios证书检测  
@@ -36,7 +38,5 @@ http://www.example.com;
 
 ## 三、效果展示：  
 ![](https://github.com/Forever18/p12certcheck/blob/main/static/pack/checkcert/images/p12.png)  
-  
-  
 ![](https://github.com/Forever18/p12certcheck/blob/main/static/pack/checkcert/images/ipa.png)  
 
