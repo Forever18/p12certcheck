@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" />
-    <meta name="keywords" content="iOS证书在线检测,ipa证书检测,p12证书在线检测,描述文件在线检测" />
-    <meta name="description" content="iOS证书在线检测,ipa证书检测,p12证书在线检测,描述文件在线检测" />
+    <meta name="keywords" content="iOS证书在线检测,ipa证书检测,p12证书检测,描述文件检测,苹果企业证书检测,掉签检测" />
+    <meta name="description" content="iOS证书在线检测,ipa证书检测,p12证书检测,描述文件检测,苹果企业证书检测,掉签检测" />
     <title>iOS证书在线检测</title>
     <link rel="stylesheet" href="static/cloud/static/css/font.css" />
     <link rel="stylesheet" type="text/css" href="static/cloud/static/css/spectrum.css" />
@@ -18,6 +18,7 @@
     <script type="text/javascript" src="static/cloud/static/js/js.js"></script>
     <script type="text/javascript" src="static/cloud/static/js/spectrum.js"></script>
     <script type="text/javascript" src="static/cloud/static/js/jquery.lazyload.js"></script>
+    <script type="text/javascript" src="static/cloud/static/js/jszip.min.js"></script>
     <script>
         isHideFooter = false;
     </script>
@@ -30,8 +31,8 @@
             left: 0px;
             width: 100%;
             height: 100%;
-            z-index:auto;
-            display : fixed;
+            z-index: auto;
+            display: fixed;
         }
 
         .shadow{
@@ -70,6 +71,10 @@
 
             <input type="file" name="uploadfile" class="hide" onchange="handleFileUpload(this.files, $(this))" data-target="" id="uploadfile" />
             <div class="content container mt-80 inner-content">
+            <div class="col-md-offset-8 text-center">
+                <button type="button" class="btn btn-success" onclick="window.open('https://t.me/p12certcheck')">加入频道</button>
+                <p style="color:red">可收到掉签实时通知</p>
+            </div>
                 <h3 class="text-center font-36 font-cert-check-title">iOS 证书在线检测</h3>
                 <h3 class="text-center font-16 mt-20 color-8c9497">想检查证书到期时间？用户反馈无法下载安装？为您在线检测 iOS 证书是否正常</h3>
                 <div class="text-center cert mt-30 col-md-8 col-md-offset-2">
@@ -91,7 +96,7 @@
       <span>
        <div class="ant-upload ant-upload-drag" id="target_box">
         <span tabindex="0" class="ant-upload ant-upload-btn" role="button" onclick="document.querySelector('#ipaFile').click()")>
-            <input type="file" name="ipaFile" class="hide" accept=".mobileprovision,.p12,.ipa" data-target="" id="ipaFile" onchange="ipaUpload(this.files, $(this))"/>
+            <input type="file" name="ipaFile" class="hide" data-target="" id="ipaFile" onchange="ipaUpload(this.files, $(this))"/>
          <div class="ant-upload-drag-container">
           <p class="ant-upload-drag-icon"><i aria-label="icon: inbox" class="anticon anticon-inbox">
             <svg viewbox="0 0 1024 1024" focusable="false" class="" data-icon="inbox" width="1em" height="1em" fill="currentColor" aria-hidden="true">
@@ -105,9 +110,11 @@
       </span>
                                             </div>
                                         </div>
-                                        <div id="Name"></div>
-                                        <div id="Status"></div>
-                                        <div id="ExpireTime"></div>
+                                        <div class="ipaCheckResult">
+                                            <div id="Name" class="text-left"></div>
+                                            <div id="Status" class="text-left"></div>
+                                            <div id="ExpireTime" class="text-left"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -170,11 +177,11 @@
                                             <div class="cert-icon" style="">
                                                 <img id="certFlag" src="static/pack/checkcert/images/cert_icon_2x.png" class="img-responsive pull-right" />
                                             </div>
-                                            <div class="text-left" style="">
+                                            <div class="text-left cert-text-result" style="">
                                                 <p class="check-item">
                                                     <span class="">证书状态</span>
                                                 </p>
-                                                <p class="" style="margin-bottom:0">
+                                                <p class="">
                         <span class="font-18" style="font-weight:600">
                           <span class="certStatusSpan" id="certStatus"></span>
                           <a
@@ -274,7 +281,7 @@
                             </div>
                         </div>
                         <div class="row mb-30">
-                            <a style="display: inline-block; padding: 6px 13px;" class="btn-u h-30 mt-30 btn-check hide" id="recheckBtn" onclick="toggleRes()"> <span class="font-13">继续检测其他证书</span></a>
+                            <a style="display: inline-block; padding: 6px 13px;" class="btn-u h-30 mt-30 btn-check hide" id="recheckBtn" onclick="toggleRes()"> <span class="font-13">继续检测</span></a>
                         </div>
                         <div class="alert alert-warning alert-dismissablewarning mb-0 mt-50 text-left" id="fileCheckAlert" style="border-radius:0;border:none;color:#555; margin-bottom: 0px;">
                             <i class="fa fa-exclamation-circle"></i><span class="ml-5" style="margin-left:5px;">您提交的证书文件和密码，将仅用于本次证书有效性检测，我们不会进行存储。</span> <br />
@@ -366,7 +373,8 @@
                 cancelCallback: cancelCallback
             });
         }
-    </script></body>
+    </script>
+</body>
 </html>
 
 
