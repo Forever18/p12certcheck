@@ -69,7 +69,7 @@
 .blue-line{width: 35px; height: 2px; background-color: #157df1; margin: 13px 0;}
 .crumbs{padding: 15px 0; color: #666;}
 .crumbs a{color: #333;}
-.crumbs span{margin: 0 10px;}
+.crumbs span{}
 .warn-prompt{background-color: #fff5e7; padding: 8px 20px; border: 1px solid #feebcd; margin-top: 10px; font-size: 12px;}
 .warn-prompt .iconfont{color: #fd9823; margin-right: 5px; font-size: 13px;}
 .ie-prompt{display: none;}

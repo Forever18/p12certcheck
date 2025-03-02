@@ -274,11 +274,11 @@ body {
   margin: auto;
 }
 #certCheckTabContent > #certResult > #certDetail .cert-result {
-  display: flex;
-  width: 30%;
-  margin: auto;
-  justify-content: space-between;
-  align-items: center;
+  /*display: flex;*/
+  /*width: 25%;*/
+  /*margin: auto;*/
+  /*justify-content: space-between;*/
+  /*align-items: center;*/
 }
 #certCheckTabContent > #certResult > #certDetail .provision-detail > .provision-item-left {
   width: 46.5%;
@@ -473,4 +473,76 @@ p {
 }
 .mt-80 {
     margin-top:0px;
+}
+.ipaCheckResult {
+  width: 500px;
+  margin-left: 200px;
+}
+.text-left {
+  text-align: left;
+}
+
+.cert-text-result {
+  display: inline-block;
+  margin-left: 20px;
+  height: 60px;
+  overflow: hidden;
+}
+.cert-icon {
+  display: inline-block;
+  width: 80px;
+  height: 60px;
+  margin-left: -30px
+}
+
+/* 针对小型手机 */
+@media only screen and (max-width: 320px) {
+  .cert-text-result {
+  }
+  .cert-icon {
+    margin-left: 80px;
+    margin-top: 10px;
+  }
+  .ipaCheckResult {
+    margin-left: 10px;
+  }
+}
+
+/* 针对中型手机 */
+@media only screen and (max-width: 375px) {
+  .cert-text-result {
+  }
+  .cert-icon {
+    margin-left: 80px;
+    margin-top: 10px;
+  }
+  .ipaCheckResult {
+    margin-left: 10px;
+  }
+}
+
+/* 针对大型手机 */
+@media only screen and (max-width: 414px) {
+  .cert-text-result {
+  }
+  .cert-icon {
+    margin-left: 100px;
+    margin-top: 10px;
+  }
+  .ipaCheckResult {
+    margin-left: 10px;
+  }
+}
+
+/* 针对平板设备 */
+@media only screen and (max-width: 768px) {
+  .cert-text-result {
+  }
+  .cert-icon {
+    margin-left: 80px;
+    margin-top: 10px;
+  }
+  .ipaCheckResult {
+    margin-left: 10px;
+  }
 }
