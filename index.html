@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" />
-    <meta name="keywords" content="iOS证书在线检测,ipa证书检测,p12证书检测,描述文件检测,苹果企业证书检测,掉签检测" />
-    <meta name="description" content="iOS证书在线检测,ipa证书检测,p12证书检测,描述文件检测,苹果企业证书检测,掉签检测" />
-    <title>iOS证书在线检测</title>
+    <meta name="keywords" content="iOS证书在线检测,p12证书检测,ipa证书检测,苹果企业证书检测,描述文件检测,掉签检测" />
+    <meta name="description" content="iOS证书在线检测,p12证书检测,ipa证书检测,苹果企业证书检测,描述文件检测,掉签检测" />
+    <title>iOS证书在线检测 | 苹果证书检测 | p12证书检测工具</title>
     <link rel="stylesheet" href="static/cloud/static/css/font.css" />
     <link rel="stylesheet" type="text/css" href="static/cloud/static/css/spectrum.css" />
     <link rel="stylesheet" type="text/css" href="static/cloud/static/css/bootstrap.min.css" />
@@ -80,8 +80,8 @@
                 <div class="text-center cert mt-30 col-md-8 col-md-offset-2">
                     <div class="form-horizontal text-center" id="checkStatus">
                         <ul id="certCheckTab" class="nav nav-tabs">
-                            <li class="active"><a href="#certFile" data-id="file" data-toggle="tab" onclick="toggleShowRes()">p12 文件检测</a></li>
-                            <li> <a href="#shortUrl" data-id="url" data-toggle="tab" onclick="toggleHideRes()">  安装包检测</a> </li>
+                            <li class="active"><a href="#certFile" data-id="file" data-toggle="tab">p12 文件检测</a></li>
+                            <li> <a href="#shortUrl" data-id="url" data-toggle="tab">  安装包检测</a> </li>
                         </ul>
                         <div id="certCheckTabContent" class="tab-content" style="">
                             <div class="tab-pane fade" id="shortUrl">
@@ -119,7 +119,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade active in " id="certFile">
-                                <h5 class="url-title mb-30">请上传 iOS p12 证书及 mobilprovision 文件</h5>
+                                <h5 class="url-title mb-30">请上传 iOS 证书 p12和mobilprovision 文件</h5>
                                 <div class="container-fluid file-upload-container">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -146,7 +146,7 @@
                                                 <span for="name" class="font-16">p12 证书密码：</span>
                                                 <input name="password" type="password" id="password" class="form-control" placeholder="如密码为空可不填" />
                                             </div>
-                                            <button class="btn-u h-30 mt-30 btn-check" id="submitButton"><span class="font-13">立即检测</span></button>
+                                            <button class="btn-u h-30 mt-30 btn-check" id="confirmButton" onclick="if(typeof window.save === 'function') window.save();"><span class="font-13">立即检测</span></button>
                                         </div>
 
                                     </div>
@@ -154,7 +154,9 @@
                                 </div>
                             </div>
                             <div class="hide text-center" id="certResult">
-                                <h5 class="url-title mb-30">检测结果</h5>
+                                <h5 class="url-title mb-30">
+                                    <span class="cert-title-text">检测结果</span>
+                                </h5>
                                 <p class="hide" id="errorMsg">
                                     <span style="color: #FD5A5A; font-size: 18px;"></span>
                                     <a
@@ -174,15 +176,12 @@
                                 <div class="row text-center" id="certDetail">
                                     <div id="fileCertResult">
                                         <div class="cert-result mb-40">
-                                            <div class="cert-icon" style="">
-                                                <img id="certFlag" src="static/pack/checkcert/images/cert_icon_2x.png" class="img-responsive pull-right" />
+                                            <div class="cert-icon">
+                                                <img src="static/pack/checkcert/images/cert_icon_2x.png" class="img-responsive" />
                                             </div>
-                                            <div class="text-left cert-text-result" style="">
-                                                <p class="check-item">
-                                                    <span class="">证书状态</span>
-                                                </p>
-                                                <p class="">
-                        <span class="font-18" style="font-weight:600">
+                                            <div class="cert-text-result" style="">
+                                                <span class="cert-status-label">证书状态</span>
+                                                <span class="font-18" style="font-weight:600">
                           <span class="certStatusSpan" id="certStatus"></span>
                           <a
                                   href="javascript:void(0);"
@@ -199,7 +198,6 @@
                           ><i class="fa fa-question-circle" style="font-size:14px;color:#29bb9c;"></i
                           ></a>
                         </span>
-                                                </p>
                                             </div>
                                         </div>
                                         <div class="col-md-12" style="">
@@ -281,10 +279,10 @@
                             </div>
                         </div>
                         <div class="row mb-30">
-                            <a style="display: inline-block; padding: 6px 13px;" class="btn-u h-30 mt-30 btn-check hide" id="recheckBtn" onclick="toggleRes()"> <span class="font-13">继续检测</span></a>
+                            <a style="display: inline-block; padding: 6px 13px;" class="btn-u h-30 mt-30 btn-check hide" id="recheckBtn" onclick="handleRecheck()"> <span class="font-13">继续检测</span></a>
                         </div>
                         <div class="alert alert-warning alert-dismissablewarning mb-0 mt-50 text-left" id="fileCheckAlert" style="border-radius:0;border:none;color:#555; margin-bottom: 0px;">
-                            <i class="fa fa-exclamation-circle"></i><span class="ml-5" style="margin-left:5px;">您提交的证书文件和密码，将仅用于本次证书有效性检测，我们不会进行存储。</span> <br />
+                            <i class="fa fa-exclamation-circle"></i><span class="ml-5" style="margin-left:5px;">您提交的证书文件和密码，将仅用于本次证书有效性检测。</span> <br />
                             <i class="fa fa-exclamation-circle"></i
                             ><span class="ml-5" style="margin-left:5px;">证书检测结果精准性100%</span>
                         </div>
@@ -294,6 +292,265 @@
             <script src="static/pack/checkcert/libs/jquery.min.js"></script>
             <script src="static/pack/checkcert/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
             <script src="static/pack/checkcert/js/index.js"></script>
+            <script>
+                (function ($) {
+                    function hideRecheckBtn() {
+                        $('#recheckBtn').addClass('hide');
+                    }
+
+                    function showRecheckBtn() {
+                        $('#recheckBtn').removeClass('hide');
+                    }
+
+                    // 重置p12文件检测页面到初始状态：清空表单，显示上传表单
+                    function resetP12CheckPage() {
+                        // 强制清除所有状态
+                        $('#toggleResStatus').val('');
+                        // 强制隐藏检测结果
+                        $('#certResult').addClass('hide');
+                        // 强制显示上传表单
+                        $('#certFile').removeClass('hide');
+                        // 清空表单
+                        $('#password').val('');
+                        // 显示立即检测按钮
+                        $('#confirmButton').removeClass('hide').removeAttr('disabled');
+                        // 清空文件上传（需要调用原逻辑清空）
+                        if (typeof window.cleanCertCache === 'function') {
+                            window.cleanCertCache();
+                        }
+                        hideRecheckBtn();
+                    }
+
+                    // 重置安装包检测页面到初始状态：清空表单，显示上传区域
+                    function resetIpaCheckPage() {
+                        // 强制清除检测结果内容
+                        $('#Name').html('');
+                        $('#Status').html('');
+                        $('#ExpireTime').html('');
+                        // 强制隐藏检测结果区域
+                        $('.ipaCheckResult').hide();
+                        // 强制显示上传区域
+                        $('#target_box').show();
+                        // 确保shortUrl tab-pane显示
+                        $('#shortUrl').removeClass('hide');
+                        hideRecheckBtn();
+                        $('#ipaFile').val('');
+                        // 清空IPA缓存
+                        if (typeof window.cleanIpaCache === 'function') {
+                            window.cleanIpaCache();
+                        }
+                    }
+
+                    // 移动端：格式化IPA检测结果显示，让标签和值换行显示（只在移动端执行）
+                    function formatIpaResultForMobile() {
+                        if (window.innerWidth > 767) return;
+                        $('#Name, #Status, #ExpireTime').each(function() {
+                            var $this = $(this);
+                            var text = $this.html();
+                            if (text && text.indexOf('\n') === -1 && text.indexOf('：') !== -1) {
+                                text = text.replace('：', '：\n');
+                                $this.html(text);
+                            }
+                        });
+                    }
+
+                    // 导出函数供外部使用
+                    window.hideRecheckBtn = hideRecheckBtn;
+                    window.showRecheckBtn = showRecheckBtn;
+                    window.handleRecheck = function() {
+                        var activeTab = $('#certCheckTab li.active a').attr('href');
+                        if (activeTab === '#shortUrl') {
+                            // 在安装包检测页面，重置到初始页面
+                            resetIpaCheckPage();
+                        } else {
+                            // 在p12文件检测页面，重置到初始页面
+                            resetP12CheckPage();
+                        }
+                    };
+
+                    // 包装原函数，确保切换时清除检测结果
+                    var originalToggleHideRes = window.toggleHideRes;
+                    window.toggleHideRes = function () {
+                        // 先清除p12检测结果状态
+                        $('#toggleResStatus').val('');
+                        // 强制清除p12检测结果
+                        $('#certResult').addClass('hide');
+                        if (typeof originalToggleHideRes === 'function') {
+                            originalToggleHideRes.apply(this, arguments);
+                        }
+                        hideRecheckBtn();
+                    };
+
+                    // 标记是否正在切换标签页
+                    var isSwitchingTab = false;
+                    
+                    // 包装toggleShowRes，完全禁用它的功能（因为我们已经移除了onclick，但可能还有其他地方调用）
+                    var originalToggleShowRes = window.toggleShowRes;
+                    window.toggleShowRes = function () {
+                        // 如果正在切换标签页，不执行任何操作
+                        if (typeof isSwitchingTab !== 'undefined' && isSwitchingTab) {
+                            return;
+                        }
+                        // 如果被调用，强制清除检测结果，不显示检测结果
+                        $('#toggleResStatus').val('');
+                        $('#certResult').addClass('hide');
+                        // 确保所有tab-pane都显示（不被隐藏）
+                        $('.tab-pane').removeClass('hide');
+                        return;
+                    };
+                    
+                    // 包装displayRes函数，确保切换标签页时不显示检测结果
+                    var originalDisplayRes = window.displayRes;
+                    if (typeof originalDisplayRes === 'function') {
+                        window.displayRes = function(res) {
+                            // 如果正在切换标签页，不显示检测结果
+                            if (typeof isSwitchingTab !== 'undefined' && isSwitchingTab) {
+                                return;
+                            }
+                            // 否则调用原函数
+                            return originalDisplayRes.apply(this, arguments);
+                        };
+                    }
+
+                    // 包装save函数，使用confirmButton替代submitButton
+                    var originalSave = window.save;
+                    if (typeof originalSave === 'function') {
+                        window.save = function() {
+                            // 在检测开始时，隐藏立即检测按钮
+                            var $confirmBtn = $('#confirmButton');
+                            if ($confirmBtn.length) {
+                                $confirmBtn.addClass('hide').attr('disabled', 'disabled');
+                            }
+                            // 调用原函数（原函数会检查文件是否上传）
+                            var result = originalSave.apply(this, arguments);
+                            // 如果检测失败，恢复按钮状态
+                            if (result === false) {
+                                $confirmBtn.removeClass('hide').removeAttr('disabled');
+                            }
+                            return result;
+                        };
+                    }
+
+                    // 包装displayReCheckBtn函数，确保隐藏confirmButton
+                    var originalDisplayReCheckBtn = window.displayReCheckBtn;
+                    if (typeof originalDisplayReCheckBtn === 'function') {
+                        window.displayReCheckBtn = function() {
+                            // 调用原函数
+                            originalDisplayReCheckBtn.apply(this, arguments);
+                            // 隐藏确定按钮
+                            $('#confirmButton').addClass('hide');
+                        };
+                    }
+
+                    // 包装displayCheckBtn函数，确保显示confirmButton
+                    var originalDisplayCheckBtn = window.displayCheckBtn;
+                    if (typeof originalDisplayCheckBtn === 'function') {
+                        window.displayCheckBtn = function() {
+                            // 调用原函数
+                            originalDisplayCheckBtn.apply(this, arguments);
+                            // 显示确定按钮
+                            $('#confirmButton').removeClass('hide');
+                        };
+                    }
+
+                    // 标记是否正在切换标签页
+                    var isSwitchingTab = false;
+                    
+                    $(function () {
+                        // 监听标签页点击事件：在切换之前先清除状态并重置页面
+                        $('a[data-toggle="tab"]').on('click', function (e) {
+                            var targetTab = $(this).attr('href');
+                            
+                            // 设置标记，表示正在切换标签页
+                            isSwitchingTab = true;
+                            
+                            // 立即清除toggleResStatus，防止显示检测结果
+                            $('#toggleResStatus').val('');
+                            // 立即清除所有检测结果
+                            $('#certResult').addClass('hide');
+                            $('.ipaCheckResult').hide();
+                            
+                            // 确保所有tab-pane都显示（不被隐藏）
+                            $('.tab-pane').removeClass('hide');
+                            
+                            // 根据目标标签页重置页面
+                            if (targetTab === '#certFile') {
+                                resetP12CheckPage();
+                            } else if (targetTab === '#shortUrl') {
+                                resetIpaCheckPage();
+                            }
+                            
+                            // 延迟重置标记，确保切换完成
+                            setTimeout(function() {
+                                isSwitchingTab = false;
+                            }, 100);
+                        });
+                        
+                        // 监听标签页切换完成事件，确保按钮和上传区域被显示
+                        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                            var targetTab = $(e.target).attr('href');
+                            // 再次确保清除状态
+                            $('#toggleResStatus').val('');
+                            $('#certResult').addClass('hide');
+                            $('.ipaCheckResult').hide();
+                            
+                            // 确保所有tab-pane都显示（不被隐藏）
+                            $('.tab-pane').removeClass('hide');
+                            
+                            if (targetTab === '#certFile') {
+                                // 确保立即检测按钮被显示
+                                $('#confirmButton').removeClass('hide').removeAttr('disabled');
+                                $('#certFile').removeClass('hide');
+                            } else if (targetTab === '#shortUrl') {
+                                // 确保上传区域被显示
+                                $('#target_box').show();
+                                $('#shortUrl').removeClass('hide');
+                            }
+                            
+                            // 重置标记
+                            isSwitchingTab = false;
+                        });
+
+                        $('a[href="#shortUrl"]').on('show.bs.tab click', hideRecheckBtn);
+                        
+                        // 包装displayResIpa函数
+                        if (typeof window.displayResIpa === 'function' && !window.__wrappedDisplayResIpa) {
+                            var originalDisplayResIpa = window.displayResIpa;
+                            window.displayResIpa = function () {
+                                var result = originalDisplayResIpa.apply(this, arguments);
+                                $('.ipaCheckResult').show();
+                                $('#target_box').hide();
+                                showRecheckBtn();
+                                if (window.innerWidth <= 767) {
+                                    setTimeout(formatIpaResultForMobile, 100);
+                                }
+                                return result;
+                            };
+                            window.__wrappedDisplayResIpa = true;
+                        }
+                        
+                        // 移动端：使用MutationObserver监听内容变化
+                        if (window.MutationObserver && window.innerWidth <= 767) {
+                            var observer = new MutationObserver(function() {
+                                if (window.innerWidth <= 767) {
+                                    formatIpaResultForMobile();
+                                }
+                            });
+                            ['Name', 'Status', 'ExpireTime'].forEach(function(id) {
+                                var el = document.getElementById(id);
+                                if (el) observer.observe(el, { childList: true, subtree: true });
+                            });
+                        }
+                        
+                        // 监听窗口大小变化
+                        $(window).on('resize', function() {
+                            if (window.innerWidth <= 767) {
+                                formatIpaResultForMobile();
+                            }
+                        });
+                    });
+                })(jQuery);
+            </script>
         </div>
     </div>
     <div id="view"></div>

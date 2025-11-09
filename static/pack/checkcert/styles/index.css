@@ -280,6 +280,33 @@ body {
   /*justify-content: space-between;*/
   /*align-items: center;*/
 }
+
+/* 桌面端：证书状态和状态值居中显示 */
+@media (min-width: 768px) {
+  #certCheckTabContent > #certResult > #certDetail .cert-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #certCheckTabContent > #certResult > #certDetail .cert-text-result {
+    text-align: center;
+    margin-left: 0;
+  }
+  #certCheckTabContent > #certResult > #certDetail .cert-text-result p.check-item {
+    text-align: center;
+    justify-content: center;
+  }
+  #certCheckTabContent > #certResult > #certDetail .cert-text-result p.check-item span {
+    text-align: center;
+  }
+  #certCheckTabContent > #certResult > #certDetail .cert-text-result p span.font-18 {
+    text-align: center;
+  }
+  #certCheckTabContent > #certResult > #certDetail .cert-text-result p span.certStatusSpan {
+    text-align: center;
+  }
+}
 #certCheckTabContent > #certResult > #certDetail .provision-detail > .provision-item-left {
   width: 46.5%;
   float: left;
@@ -444,6 +471,15 @@ body {
 .mb-30 {
   margin-bottom: 30px !important;
 }
+/* 安装包检测：继续检测按钮居中 */
+.row.mb-30 {
+  text-align: center;
+}
+#recheckBtn {
+  margin: 0 auto;
+  display: inline-block;
+  margin-top: 25px !important; /* 增加按钮与上方内容的间距 */
+}
 .mt-30 {
   margin-top: 30px;
 }
@@ -476,7 +512,22 @@ p {
 }
 .ipaCheckResult {
   width: 500px;
-  margin-left: 200px;
+  margin-left: calc((100% - 500px) / 2 + 130px); /* 桌面端：响应式居中+偏移，自动适应不同屏幕宽度；如果偏左增加数值，偏右减少数值 */
+  margin-right: auto;
+  /* 如果还是不居中，可能是父容器有padding，可以尝试：margin-left: calc((100% - 500px - 父容器padding) / 2); */
+}
+/* IPA检测结果：统一字体和标点符号，与p12保持一致 */
+.ipaCheckResult #Name,
+.ipaCheckResult #Status,
+.ipaCheckResult #ExpireTime {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+.ipaCheckResult #Name span,
+.ipaCheckResult #Status span,
+.ipaCheckResult #ExpireTime span {
+  font-size: 16px;
 }
 .text-left {
   text-align: left;
@@ -492,7 +543,48 @@ p {
   display: inline-block;
   width: 80px;
   height: 60px;
-  margin-left: -30px
+  margin-left: 0;
+  vertical-align: middle;
+}
+/* 桌面端：第二行显示图片、证书状态、状态值 */
+@media (min-width: 768px) {
+  #certCheckTabContent > #certResult > #certDetail .cert-result {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  #certCheckTabContent > #certResult > #certDetail .cert-result .cert-icon {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin-left: 0;
+    flex-shrink: 0;
+  }
+  #certCheckTabContent > #certResult > #certDetail .cert-result .cert-icon img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  #certCheckTabContent > #certResult > #certDetail .cert-result .cert-text-result {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-left: 0;
+    height: auto;
+  }
+  #certCheckTabContent > #certResult > #certDetail .cert-result .cert-text-result .cert-status-label {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 0;
+    line-height: 1.4;
+  }
+  #certCheckTabContent > #certResult > #certDetail .cert-result .cert-text-result .font-18 {
+    text-align: left;
+    line-height: 1.4;
+  }
 }
 
 /* 针对小型手机 */
@@ -544,5 +636,100 @@ p {
   }
   .ipaCheckResult {
     margin-left: 10px;
+  }
+}
+
+/* 移动端样式 */
+@media (max-width: 767px) {
+  /* IPA检测结果：三个字段换行展示 */
+  .ipaCheckResult {
+    width: 100%;
+    margin-left: 0; /* 移动端：往右移动，改为具体数值，如 margin-left: 20px; */
+    padding: 0 15px;
+  }
+  .ipaCheckResult #Name,
+  .ipaCheckResult #Status,
+  .ipaCheckResult #ExpireTime {
+    display: block;
+    width: 100%;
+    margin-bottom: 8px;
+    word-break: break-word;
+    white-space: pre-line;
+    font-size: 16px;
+    color: #555;
+    line-height: 1.4;
+  }
+  /* IPA检测结果：标签和值换行显示 - 使用CSS在冒号后换行 */
+  .ipaCheckResult #Name::after,
+  .ipaCheckResult #Status::after,
+  .ipaCheckResult #ExpireTime::after {
+    content: '';
+  }
+  
+  /* p12检测结果页面：logo和"检测结果"标题水平居中、垂直居中，减小间距 */
+  #certResult .url-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px !important;
+  }
+  #certResult .cert-title-with-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  #certResult .cert-title-icon {
+    width: 50px;
+    height: auto;
+    display: block;
+    margin: 0;
+    vertical-align: middle;
+  }
+  #certResult .cert-title-text {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  #certResult .cert-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  #certResult .cert-result .cert-icon {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    margin-top: 0;
+    margin-right: 94px; /* 往左调整距离，数值越大越往左 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #certResult .cert-result .cert-icon img {
+    width: 100%;
+    height: auto;
+  }
+  #certResult .cert-result .cert-text-result {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-left: 0;
+    text-align: left;
+    width: 100%;
+  }
+  #certResult .cert-text-result p.check-item {
+    text-align: left;
+  }
+  #certResult .cert-text-result p.check-item span {
+    text-align: left;
+  }
+  #certResult .cert-text-result p span.font-18 {
+    text-align: left;
+  }
+  #certResult .cert-text-result p span.certStatusSpan {
+    text-align: left;
   }
 }
