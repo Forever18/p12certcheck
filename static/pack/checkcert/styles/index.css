@@ -358,6 +358,72 @@ body {
 #certCheckTabContent #certFile .file-upload-container {
   padding: 0 45px;
 }
+#certCheckTabContent .ipa-upload-container {
+  padding: 0 45px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+#certCheckTabContent .ipa-upload-box {
+  height: 220px;
+  max-width: 560px;
+  margin-bottom: 24px;
+  background: #fafbfc;
+  border-color: #e0e0e0;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+#certCheckTabContent .ipa-upload-box:hover,
+#certCheckTabContent .ipa-upload-box.drag {
+  border-color: #5c92ef;
+  background: #f5f9ff;
+  box-shadow: 0 4px 16px rgba(92, 146, 239, 0.12);
+}
+#certCheckTabContent .ipa-upload-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  pointer-events: none;
+}
+#certCheckTabContent .ipa-upload-icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #eef4fd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  transition: background-color 0.2s ease;
+}
+#certCheckTabContent .ipa-upload-box:hover .ipa-upload-icon-wrap,
+#certCheckTabContent .ipa-upload-box.drag .ipa-upload-icon-wrap {
+  background: #dce9fc;
+}
+#certCheckTabContent .ipa-upload-icon-wrap .iconfont {
+  font-size: 28px;
+  color: #5c92ef;
+}
+#certCheckTabContent .ipa-upload-title {
+  color: #333;
+  font-size: 15px;
+  margin: 0 0 6px;
+}
+#certCheckTabContent .ipa-upload-hint {
+  color: #999;
+  font-size: 13px;
+  margin: 0;
+}
+#certCheckTabContent .ipa-upload-box:hover .ipa-upload-title {
+  color: #444;
+}
+#certCheckTabContent .ipa-upload-box:hover div.upload-tips p {
+  color: #666;
+}
+#certCheckTabContent .ipaCheckResult {
+  max-width: 560px;
+  margin: 24px auto 0;
+}
 #certCheckTabContent #certFile .file-upload-container .file-icon {
   width: 40px;
   margin-bottom: 15px;
@@ -381,6 +447,24 @@ body {
   width: 80px;
 }
 @media (max-width: 767px) {
+  #certCheckTabContent .ipa-upload-container {
+    padding: 0 15px;
+  }
+  #certCheckTabContent .ipa-upload-box {
+    height: 200px;
+    max-width: 100%;
+  }
+  #certCheckTabContent .ipa-upload-icon-wrap {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 12px;
+  }
+  #certCheckTabContent .ipa-upload-icon-wrap .iconfont {
+    font-size: 24px;
+  }
+  #certCheckTabContent .ipa-upload-title {
+    font-size: 14px;
+  }
   .upload-img-init,
   #checkStatus input#password {
     width: 100%;
@@ -511,18 +595,44 @@ p {
     margin-top:0px;
 }
 .ipaCheckResult {
-  width: 500px;
-  margin-left: calc((100% - 500px) / 2 + 130px); /* 桌面端：响应式居中+偏移，自动适应不同屏幕宽度；如果偏左增加数值，偏右减少数值 */
-  margin-right: auto;
-  /* 如果还是不居中，可能是父容器有padding，可以尝试：margin-left: calc((100% - 500px - 父容器padding) / 2); */
+  width: 100%;
+  max-width: 560px;
+  margin: 24px auto 0;
+  padding: 20px 24px;
+  background: #f5f9ff;
+  border: 1px solid #dce9fc;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(92, 146, 239, 0.08);
 }
-/* IPA检测结果：统一字体和标点符号，与p12保持一致 */
 .ipaCheckResult #Name,
 .ipaCheckResult #Status,
 .ipaCheckResult #ExpireTime {
   font-size: 16px;
   color: #555;
   line-height: 1.6;
+}
+.ipaCheckResult #Name,
+.ipaCheckResult #Status {
+  margin-bottom: 10px;
+}
+.ipaCheckResult #ExpireTime:empty {
+  display: none;
+  margin-bottom: 0;
+}
+@media (min-width: 768px) {
+  #certCheckTabContent .ipaCheckResult,
+  .ipaCheckResult {
+    text-align: center;
+    padding: 24px 32px;
+  }
+  .ipaCheckResult #Name,
+  .ipaCheckResult #Status,
+  .ipaCheckResult #ExpireTime,
+  .ipaCheckResult #Name.text-left,
+  .ipaCheckResult #Status.text-left,
+  .ipaCheckResult #ExpireTime.text-left {
+    text-align: center;
+  }
 }
 .ipaCheckResult #Name span,
 .ipaCheckResult #Status span,
@@ -641,11 +751,10 @@ p {
 
 /* 移动端样式 */
 @media (max-width: 767px) {
-  /* IPA检测结果：三个字段换行展示 */
   .ipaCheckResult {
     width: 100%;
-    margin-left: 0; /* 移动端：往右移动，改为具体数值，如 margin-left: 20px; */
-    padding: 0 15px;
+    margin-left: 0;
+    padding: 16px 18px;
   }
   .ipaCheckResult #Name,
   .ipaCheckResult #Status,
@@ -659,13 +768,12 @@ p {
     color: #555;
     line-height: 1.4;
   }
-  /* IPA检测结果：标签和值换行显示 - 使用CSS在冒号后换行 */
   .ipaCheckResult #Name::after,
   .ipaCheckResult #Status::after,
   .ipaCheckResult #ExpireTime::after {
     content: '';
   }
-  
+
   /* p12检测结果页面：logo和"检测结果"标题水平居中、垂直居中，减小间距 */
   #certResult .url-title {
     display: flex;

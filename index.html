@@ -7,21 +7,14 @@
     <meta name="description" content="iOS证书在线检测,p12证书检测,ipa证书检测,苹果企业证书检测,描述文件检测,掉签检测" />
     <title>iOS证书在线检测 | 苹果证书检测 | p12证书检测工具</title>
     <link rel="stylesheet" href="static/cloud/static/css/font.css" />
-    <link rel="stylesheet" type="text/css" href="static/cloud/static/css/spectrum.css" />
     <link rel="stylesheet" type="text/css" href="static/cloud/static/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="static/cloud/static/css/base.css" />
     <link rel="stylesheet" type="text/css" href="static/cloud/static/css/main.css" />
     <link rel="stylesheet" type="text/css" href="static/cloud/static/css/h5.css" />
     <script type="text/javascript" src="static/cloud/static/js/jquery.min.js"></script>
     <script type="text/javascript" src="static/cloud/static/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="static/cloud/static/js/vue.js"></script>
     <script type="text/javascript" src="static/cloud/static/js/js.js"></script>
-    <script type="text/javascript" src="static/cloud/static/js/spectrum.js"></script>
-    <script type="text/javascript" src="static/cloud/static/js/jquery.lazyload.js"></script>
     <script type="text/javascript" src="static/cloud/static/js/jszip.min.js"></script>
-    <script>
-        isHideFooter = false;
-    </script>
 </head>
 <body>
 <header>
@@ -35,16 +28,28 @@
             display: fixed;
         }
 
-        .shadow{
-            width:100%;
-            height:100%;
-            position:absolute;
-            left:0;
-            top:0;
-            z-index:998;
-            background-color:#000;
-            opacity:0.6;
-            display:none;
+        .shadow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: none;
+        }
+        .shadow .shadow-loading {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .shadow .shadow-loading img {
+            width: 60px;
+            height: 60px;
         }
         .addBox{
         //其他属性
@@ -52,16 +57,12 @@
         }
     </style>
 </header>
-<span class="icon-menu iconfont phone-menu visible-xs"></span>
-<div class="phone-shadow"></div>
-<script src="static/cloud/static/js/html2canvas.js"></script>
-<script src="static/cloud/static/js/canvas2image.js"></script>
 <div class="toolkit-common-wrap">
     <input id="toggleResStatus" type="hidden" value="">
     <div class="container">
         <div class="shadow">
-            <div style="text-align: center; width: 100%; height: 100%;">
-                <img src="static/pack/checkcert/images/loading.gif" style="width: 60px; height: 60px;position: absolute; left:50%; top: 50%; margin-left: -30px;margin-top: -30px;">
+            <div class="shadow-loading">
+                <img src="static/pack/checkcert/images/loading.gif" alt="loading">
             </div>
         </div>
         <div class="crumbs">
@@ -72,7 +73,7 @@
             <input type="file" name="uploadfile" class="hide" onchange="handleFileUpload(this.files, $(this))" data-target="" id="uploadfile" />
             <div class="content container mt-80 inner-content">
             <div class="col-md-offset-8 text-center">
-                <button type="button" class="btn btn-success" onclick="window.open('https://t.me/p12certcheck')">加入频道</button>
+                <button type="button" class="btn btn-success" onclick="window.open('https://www.baidu.com')">加入频道</button>
                 <p style="color:red">可收到掉签实时通知</p>
             </div>
                 <h3 class="text-center font-36 font-cert-check-title">iOS 证书在线检测</h3>
@@ -85,36 +86,24 @@
                         </ul>
                         <div id="certCheckTabContent" class="tab-content" style="">
                             <div class="tab-pane fade" id="shortUrl">
-                                <link href="static/pack/checkcert/ipa/2.2b9e45b9.chunk.css" rel="stylesheet">
-                                <link href="static/pack/checkcert/ipa/main.52645ede.chunk.css" rel="stylesheet">
-                                <div id="root">
-                                    <div class="App">
-                                        <div class="ant-divider ant-divider-horizontal ant-divider-with-text-center" role="separator">
-                                        </div>
-                                        <div class="ant-spin-nested-loading">
-                                            <div class="ant-spin-container">
-      <span>
-       <div class="ant-upload ant-upload-drag" id="target_box">
-        <span tabindex="0" class="ant-upload ant-upload-btn" role="button" onclick="document.querySelector('#ipaFile').click()")>
-            <input type="file" name="ipaFile" class="hide" data-target="" id="ipaFile" onchange="ipaUpload(this.files, $(this))"/>
-         <div class="ant-upload-drag-container">
-          <p class="ant-upload-drag-icon"><i aria-label="icon: inbox" class="anticon anticon-inbox">
-            <svg viewbox="0 0 1024 1024" focusable="false" class="" data-icon="inbox" width="1em" height="1em" fill="currentColor" aria-hidden="true">
-             <path d="M885.2 446.3l-.2-.8-112.2-285.1c-5-16.1-19.9-27.2-36.8-27.2H281.2c-17 0-32.1 11.3-36.9 27.6L139.4 443l-.3.7-.2.8c-1.3 4.9-1.7 9.9-1 14.8-.1 1.6-.2 3.2-.2 4.8V830a60.9 60.9 0 0 0 60.8 60.8h627.2c33.5 0 60.8-27.3 60.9-60.8V464.1c0-1.3 0-2.6-.1-3.7.4-4.9 0-9.6-1.3-14.1zm-295.8-43l-.3 15.7c-.8 44.9-31.8 75.1-77.1 75.1-22.1 0-41.1-7.1-54.8-20.6S436 441.2 435.6 419l-.3-15.7H229.5L309 210h399.2l81.7 193.3H589.4zm-375 76.8h157.3c24.3 57.1 76 90.8 140.4 90.8 33.7 0 65-9.4 90.3-27.2 22.2-15.6 39.5-37.4 50.7-63.6h156.5V814H214.4V480.1z"></path>
-            </svg></i></p>
-          <p class="ant-upload-text">点击选择文件或拖拽文件至此区域</p>
-          <p class="ant-upload-hint">（支持 ipa 格式文件）</p>
-         </div>
-        </span>
-       </div>
-      </span>
+                                <h5 class="url-title mb-30">请上传 iOS 安装包 ipa 文件</h5>
+                                <div class="container-fluid ipa-upload-container">
+                                    <div class="upload-img-init ipa-upload-box" id="target_box" role="button" tabindex="0">
+                                        <input type="file" name="ipaFile" class="hide" data-target="" id="ipaFile" onchange="ipaUpload(this.files, $(this))"/>
+                                        <div class="ipa-upload-inner">
+                                            <div class="ipa-upload-icon-wrap">
+                                                <i class="iconfont icon-upload"></i>
+                                            </div>
+                                            <div class="text-center upload-tips">
+                                                <p class="ipa-upload-title">点击选择文件或拖拽文件至此区域</p>
+                                                <p class="ipa-upload-hint">支持 .ipa 格式安装包</p>
                                             </div>
                                         </div>
-                                        <div class="ipaCheckResult">
-                                            <div id="Name" class="text-left"></div>
-                                            <div id="Status" class="text-left"></div>
-                                            <div id="ExpireTime" class="text-left"></div>
-                                        </div>
+                                    </div>
+                                    <div class="ipaCheckResult" style="display: none;">
+                                        <div id="Name" class="text-left"></div>
+                                        <div id="Status" class="text-left"></div>
+                                        <div id="ExpireTime" class="text-left"></div>
                                     </div>
                                 </div>
                             </div>
@@ -127,17 +116,16 @@
                                                 <img id="" src="static/pack/checkcert/images/p12_file_2x.png" class="img-responsive center-block file-icon" />
                                                 <div class="text-center upload-tips">
                                                     <p>点击选择文件或拖拽文件至此区域</p>
-                                                    <p>（支持 p12 格式证书）</p>
+                                                    <p>（必传，支持 p12 格式证书）</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="upload-img-init " id="uploadProvision">
-                                                <img id="" src="static/pack/checkcert/images/optional_icon_2x.png" class="img-responsive center-block file-icon optional-icon" />
                                                 <img id="" src="static/pack/checkcert/images/mp_icon_2x.png" class="img-responsive center-block file-icon" />
                                                 <div class="text-center upload-tips">
                                                     <p>点击选择文件或拖拽文件至此区域</p>
-                                                    <p>（支持 mobileprovision 格式文件）</p>
+                                                    <p>（必传，支持 mobileprovision 格式描述文件）</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -282,9 +270,8 @@
                             <a style="display: inline-block; padding: 6px 13px;" class="btn-u h-30 mt-30 btn-check hide" id="recheckBtn" onclick="handleRecheck()"> <span class="font-13">继续检测</span></a>
                         </div>
                         <div class="alert alert-warning alert-dismissablewarning mb-0 mt-50 text-left" id="fileCheckAlert" style="border-radius:0;border:none;color:#555; margin-bottom: 0px;">
-                            <i class="fa fa-exclamation-circle"></i><span class="ml-5" style="margin-left:5px;">您提交的证书文件和密码，将仅用于本次证书有效性检测。</span> <br />
-                            <i class="fa fa-exclamation-circle"></i
-                            ><span class="ml-5" style="margin-left:5px;">证书检测结果精准性100%</span>
+                            <p style="margin:0 0 8px;"><i class="iconfont icon-warn" style="color:#666;font-size:14px;margin-right:6px;"></i>您提交的证书文件和密码，将仅用于本次证书有效性检测。</p>
+                            <p style="margin:0;"><i class="iconfont icon-warn" style="color:#666;font-size:14px;margin-right:6px;"></i>证书检测结果精准性100%</p>
                         </div>
                     </div>
                 </div>
@@ -323,25 +310,19 @@
 
                     // 重置安装包检测页面到初始状态：清空表单，显示上传区域
                     function resetIpaCheckPage() {
-                        // 强制清除检测结果内容
                         $('#Name').html('');
                         $('#Status').html('');
                         $('#ExpireTime').html('');
-                        // 强制隐藏检测结果区域
                         $('.ipaCheckResult').hide();
-                        // 强制显示上传区域
                         $('#target_box').show();
-                        // 确保shortUrl tab-pane显示
                         $('#shortUrl').removeClass('hide');
                         hideRecheckBtn();
                         $('#ipaFile').val('');
-                        // 清空IPA缓存
                         if (typeof window.cleanIpaCache === 'function') {
                             window.cleanIpaCache();
                         }
                     }
 
-                    // 移动端：格式化IPA检测结果显示，让标签和值换行显示（只在移动端执行）
                     function formatIpaResultForMobile() {
                         if (window.innerWidth > 767) return;
                         $('#Name, #Status, #ExpireTime').each(function() {
@@ -457,6 +438,19 @@
                     var isSwitchingTab = false;
                     
                     $(function () {
+                        $('#ipaFile').on('click', function (e) {
+                            e.stopPropagation();
+                        });
+                        $('#target_box').on('click', function (e) {
+                            if (e.target.id === 'ipaFile') return;
+                            document.getElementById('ipaFile').click();
+                        }).on('keydown', function (e) {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                document.getElementById('ipaFile').click();
+                            }
+                        });
+
                         // 监听标签页点击事件：在切换之前先清除状态并重置页面
                         $('a[data-toggle="tab"]').on('click', function (e) {
                             var targetTab = $(this).attr('href');
@@ -528,8 +522,7 @@
                             };
                             window.__wrappedDisplayResIpa = true;
                         }
-                        
-                        // 移动端：使用MutationObserver监听内容变化
+
                         if (window.MutationObserver && window.innerWidth <= 767) {
                             var observer = new MutationObserver(function() {
                                 if (window.innerWidth <= 767) {
@@ -541,8 +534,7 @@
                                 if (el) observer.observe(el, { childList: true, subtree: true });
                             });
                         }
-                        
-                        // 监听窗口大小变化
+
                         $(window).on('resize', function() {
                             if (window.innerWidth <= 767) {
                                 formatIpaResultForMobile();
@@ -556,63 +548,7 @@
     <div id="view"></div>
     <script>!function(c){function e(e){for(var r,t,n=e[0],o=e[1],u=e[2],i=0,l=[];i<n.length;i++)t=n[i],Object.prototype.hasOwnProperty.call(a,t)&&a[t]&&l.push(a[t][0]),a[t]=0;for(r in o)Object.prototype.hasOwnProperty.call(o,r)&&(c[r]=o[r]);for(s&&s(e);l.length;)l.shift()();return p.push.apply(p,u||[]),f()}function f(){for(var e,r=0;r<p.length;r++){for(var t=p[r],n=!0,o=1;o<t.length;o++){var u=t[o];0!==a[u]&&(n=!1)}n&&(p.splice(r--,1),e=i(i.s=t[0]))}return e}var t={},a={1:0},p=[];function i(e){if(t[e])return t[e].exports;var r=t[e]={i:e,l:!1,exports:{}};return c[e].call(r.exports,r,r.exports,i),r.l=!0,r.exports}i.m=c,i.c=t,i.d=function(e,r,t){i.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:t})},i.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},i.t=function(r,e){if(1&e&&(r=i(r)),8&e)return r;if(4&e&&"object"==typeof r&&r&&r.__esModule)return r;var t=Object.create(null);if(i.r(t),Object.defineProperty(t,"default",{enumerable:!0,value:r}),2&e&&"string"!=typeof r)for(var n in r)i.d(t,n,function(e){return r[e]}.bind(null,n));return t},i.n=function(e){var r=e&&e.__esModule?function(){return e.default}:function(){return e};return i.d(r,"a",r),r},i.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},i.p="/";var r=this["webpackJsonpios-check"]=this["webpackJsonpios-check"]||[],n=r.push.bind(r);r.push=e,r=r.slice();for(var o=0;o<r.length;o++)e(r[o]);var s=n;f()}([])</script>
     <script src="static/pack/checkcert/ipa/index.js"/>
-    <script src="static/default/js/clipboard.js"></script>
     <script>
-        if (!isHideFooter) {
-            $('.right-float-window').show();
-        }
-
-        $(function () {
-            $("body").on('click', '.fail-pay', function () {
-                $(".pay-money a:last").removeClass("disabled");
-                $(".pay-money a:last").addClass("toPay");
-            });
-            $("body").on('click', '.complete-pay', function () {
-                $(".toPay").removeClass('disabled');
-                order_sn = $('#myModalPay').find('input[name="order_sn"]').val();
-                if (!order_sn) {
-                    $('#myModalPay').modal('hide');
-                    return;
-                }
-
-                $.post('/index.php/check-pay', {order_sn: order_sn}, function (result) {
-                    if (result.code != 200) {
-                        $('#myModalPay').modal('hide');
-                    } else {
-                        if (result.data.service_type == 1 || result.data.service_type == 2) {
-                            window.location.href = '/index.php/publish';
-                        } else if (result.data.service_type == 3) {
-                            window.location.href = '/index.php/publish_sign?id=' + result.data.appid;
-                        }
-                    }
-                })
-
-            });
-
-            var windowWidth = $(window).width();
-            $("body").on('click', '.chatQQ', function () {
-                console.info(windowWidth);
-                if (windowWidth <= 750) {
-                    /*1234567对应的就是需要聊天的客服*/
-                    window.open("mqqwpa://im/chat?chat_type=wpa&uin=联系代理&version=1&src_type=web&web_src=oicqzone.com");
-                } else {
-                    window.open("http://wpa.qq.com/msgrd?v=3&uin=联系代理&site=qq&menu=yes");
-                }
-            });
-            var source_login = 0;
-            if (windowWidth <= 750 && source_login) {
-                Modal.templateModal({
-                    imgName: "modal-bg-3.jpg",
-                    title1: '提示',
-                    title2: '',
-                    p: '建议您：<br>尽快<span class="color-danger">电脑</span>登录超级签网站，即可享受<br><span class="iconfont icon-xingxing" style="color: #fec323; font-size: 12px; margin-right: 5px;"></span>免费试用应用分发APP<br><span class="iconfont icon-xingxing" style="color: #fec323; font-size: 12px; margin-right: 5px;"></span>每天免费赠送<span class="color-danger">10</span>次分发下载次数',
-                    align: 'left', // 居左 left, 居中 center, 居右 right
-                    btnText: '知道了',
-                    btnClass: "modal-btn2"
-                });
-            }
-        });
-
         function alert(msg, callback, cancelCallback, align, successBtn, cancelBtn) {
             if (!align) align = 'center';
             if (!successBtn) successBtn = '确定';
