@@ -604,18 +604,23 @@ p {
   border-radius: 8px;
   box-shadow: 0 2px 12px rgba(92, 146, 239, 0.08);
 }
-.ipaCheckResult #Name,
-.ipaCheckResult #Status,
-.ipaCheckResult #ExpireTime {
+.ipaCheckResult #ipaErrorMsg,
+.ipaCheckResult .ipa-error-msg {
+  text-align: center;
+  margin-bottom: 0;
+}
+.ipaCheckResult #ipaName,
+.ipaCheckResult #ipaStatus,
+.ipaCheckResult #ipaExpireTime {
   font-size: 16px;
   color: #555;
   line-height: 1.6;
 }
-.ipaCheckResult #Name,
-.ipaCheckResult #Status {
+.ipaCheckResult #ipaName,
+.ipaCheckResult #ipaStatus {
   margin-bottom: 10px;
 }
-.ipaCheckResult #ExpireTime:empty {
+.ipaCheckResult #ipaExpireTime:empty {
   display: none;
   margin-bottom: 0;
 }
@@ -625,18 +630,18 @@ p {
     text-align: center;
     padding: 24px 32px;
   }
-  .ipaCheckResult #Name,
-  .ipaCheckResult #Status,
-  .ipaCheckResult #ExpireTime,
-  .ipaCheckResult #Name.text-left,
-  .ipaCheckResult #Status.text-left,
-  .ipaCheckResult #ExpireTime.text-left {
+  .ipaCheckResult #ipaName,
+  .ipaCheckResult #ipaStatus,
+  .ipaCheckResult #ipaExpireTime,
+  .ipaCheckResult #ipaName.text-left,
+  .ipaCheckResult #ipaStatus.text-left,
+  .ipaCheckResult #ipaExpireTime.text-left {
     text-align: center;
   }
 }
-.ipaCheckResult #Name span,
-.ipaCheckResult #Status span,
-.ipaCheckResult #ExpireTime span {
+.ipaCheckResult #ipaName span,
+.ipaCheckResult #ipaStatus span,
+.ipaCheckResult #ipaExpireTime span {
   font-size: 16px;
 }
 .text-left {
@@ -756,9 +761,9 @@ p {
     margin-left: 0;
     padding: 16px 18px;
   }
-  .ipaCheckResult #Name,
-  .ipaCheckResult #Status,
-  .ipaCheckResult #ExpireTime {
+  .ipaCheckResult #ipaName,
+  .ipaCheckResult #ipaStatus,
+  .ipaCheckResult #ipaExpireTime {
     display: block;
     width: 100%;
     margin-bottom: 8px;
@@ -768,9 +773,9 @@ p {
     color: #555;
     line-height: 1.4;
   }
-  .ipaCheckResult #Name::after,
-  .ipaCheckResult #Status::after,
-  .ipaCheckResult #ExpireTime::after {
+  .ipaCheckResult #ipaName::after,
+  .ipaCheckResult #ipaStatus::after,
+  .ipaCheckResult #ipaExpireTime::after {
     content: '';
   }
 

@@ -86,24 +86,25 @@
                         </ul>
                         <div id="certCheckTabContent" class="tab-content" style="">
                             <div class="tab-pane fade" id="shortUrl">
-                                <h5 class="url-title mb-30">请上传 iOS 安装包 ipa 文件</h5>
+                                <h5 class="url-title mb-30">请上传 iOS 安装包 ipa 或 描述文件</h5>
                                 <div class="container-fluid ipa-upload-container">
                                     <div class="upload-img-init ipa-upload-box" id="target_box" role="button" tabindex="0">
-                                        <input type="file" name="ipaFile" class="hide" data-target="" id="ipaFile" onchange="ipaUpload(this.files, $(this))"/>
+                                        <input type="file" name="ipaFile" class="hide" data-target="" id="ipaFile" accept=".ipa,.mobileprovision" onchange="ipaUpload(this.files, $(this))"/>
                                         <div class="ipa-upload-inner">
                                             <div class="ipa-upload-icon-wrap">
                                                 <i class="iconfont icon-upload"></i>
                                             </div>
                                             <div class="text-center upload-tips">
                                                 <p class="ipa-upload-title">点击选择文件或拖拽文件至此区域</p>
-                                                <p class="ipa-upload-hint">支持 .ipa 格式安装包</p>
+                                                <p class="ipa-upload-hint">支持 .ipa 安装包 或 .mobileprovision 描述文件</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="ipaCheckResult" style="display: none;">
-                                        <div id="Name" class="text-left"></div>
-                                        <div id="Status" class="text-left"></div>
-                                        <div id="ExpireTime" class="text-left"></div>
+                                        <div id="ipaErrorMsg" class="ipa-error-msg" style="display: none;"></div>
+                                        <div id="ipaName" class="text-left"></div>
+                                        <div id="ipaStatus" class="text-left"></div>
+                                        <div id="ipaExpireTime" class="text-left"></div>
                                     </div>
                                 </div>
                             </div>
@@ -310,9 +311,6 @@
 
                     // 重置安装包检测页面到初始状态：清空表单，显示上传区域
                     function resetIpaCheckPage() {
-                        $('#Name').html('');
-                        $('#Status').html('');
-                        $('#ExpireTime').html('');
                         $('.ipaCheckResult').hide();
                         $('#target_box').show();
                         $('#shortUrl').removeClass('hide');
@@ -325,7 +323,7 @@
 
                     function formatIpaResultForMobile() {
                         if (window.innerWidth > 767) return;
-                        $('#Name, #Status, #ExpireTime').each(function() {
+                        $('#ipaName, #ipaStatus, #ipaExpireTime').each(function() {
                             var $this = $(this);
                             var text = $this.html();
                             if (text && text.indexOf('\n') === -1 && text.indexOf('：') !== -1) {
@@ -338,6 +336,7 @@
                     // 导出函数供外部使用
                     window.hideRecheckBtn = hideRecheckBtn;
                     window.showRecheckBtn = showRecheckBtn;
+                    window.formatIpaResultForMobile = formatIpaResultForMobile;
                     window.handleRecheck = function() {
                         var activeTab = $('#certCheckTab li.active a').attr('href');
                         if (activeTab === '#shortUrl') {
@@ -506,22 +505,6 @@
                         });
 
                         $('a[href="#shortUrl"]').on('show.bs.tab click', hideRecheckBtn);
-                        
-                        // 包装displayResIpa函数
-                        if (typeof window.displayResIpa === 'function' && !window.__wrappedDisplayResIpa) {
-                            var originalDisplayResIpa = window.displayResIpa;
-                            window.displayResIpa = function () {
-                                var result = originalDisplayResIpa.apply(this, arguments);
-                                $('.ipaCheckResult').show();
-                                $('#target_box').hide();
-                                showRecheckBtn();
-                                if (window.innerWidth <= 767) {
-                                    setTimeout(formatIpaResultForMobile, 100);
-                                }
-                                return result;
-                            };
-                            window.__wrappedDisplayResIpa = true;
-                        }
 
                         if (window.MutationObserver && window.innerWidth <= 767) {
                             var observer = new MutationObserver(function() {
@@ -529,7 +512,7 @@
                                     formatIpaResultForMobile();
                                 }
                             });
-                            ['Name', 'Status', 'ExpireTime'].forEach(function(id) {
+                            ['ipaName', 'ipaStatus', 'ipaExpireTime'].forEach(function(id) {
                                 var el = document.getElementById(id);
                                 if (el) observer.observe(el, { childList: true, subtree: true });
                             });
@@ -546,8 +529,7 @@
         </div>
     </div>
     <div id="view"></div>
-    <script>!function(c){function e(e){for(var r,t,n=e[0],o=e[1],u=e[2],i=0,l=[];i<n.length;i++)t=n[i],Object.prototype.hasOwnProperty.call(a,t)&&a[t]&&l.push(a[t][0]),a[t]=0;for(r in o)Object.prototype.hasOwnProperty.call(o,r)&&(c[r]=o[r]);for(s&&s(e);l.length;)l.shift()();return p.push.apply(p,u||[]),f()}function f(){for(var e,r=0;r<p.length;r++){for(var t=p[r],n=!0,o=1;o<t.length;o++){var u=t[o];0!==a[u]&&(n=!1)}n&&(p.splice(r--,1),e=i(i.s=t[0]))}return e}var t={},a={1:0},p=[];function i(e){if(t[e])return t[e].exports;var r=t[e]={i:e,l:!1,exports:{}};return c[e].call(r.exports,r,r.exports,i),r.l=!0,r.exports}i.m=c,i.c=t,i.d=function(e,r,t){i.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:t})},i.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},i.t=function(r,e){if(1&e&&(r=i(r)),8&e)return r;if(4&e&&"object"==typeof r&&r&&r.__esModule)return r;var t=Object.create(null);if(i.r(t),Object.defineProperty(t,"default",{enumerable:!0,value:r}),2&e&&"string"!=typeof r)for(var n in r)i.d(t,n,function(e){return r[e]}.bind(null,n));return t},i.n=function(e){var r=e&&e.__esModule?function(){return e.default}:function(){return e};return i.d(r,"a",r),r},i.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},i.p="/";var r=this["webpackJsonpios-check"]=this["webpackJsonpios-check"]||[],n=r.push.bind(r);r.push=e,r=r.slice();for(var o=0;o<r.length;o++)e(r[o]);var s=n;f()}([])</script>
-    <script src="static/pack/checkcert/ipa/index.js"/>
+    <script src="static/pack/checkcert/ipa/index.js"></script>
     <script>
         function alert(msg, callback, cancelCallback, align, successBtn, cancelBtn) {
             if (!align) align = 'center';
